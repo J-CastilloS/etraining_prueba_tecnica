@@ -2,7 +2,7 @@
 
 # Proyecto ETL - Prueba técnica Etraining
 
-Este proyecto realiza un pipeline ETL para datos de COVID-19 desde un archivo Excel hacia bases de datos SQLite y BigQuery. También realiza transformaciones necesarias para cálculos de indicadores clave (KPIs).
+Este proyecto realiza un pipeline ETL para datos de COVID-19 desde un archivo Excel hacia bases de datos SQLite y BigQuery. También realiza transformaciones necesarias para cálculos de indicadores clave (KPIs). Esta aplicación utiliza Docker para facilitar la configuración CRON (Dataflow) y la ejecución del entorno. La aplicación está diseñada para ejecutarse con Python 3.11.
 
 ## Requisitos
 
@@ -21,23 +21,11 @@ Este proyecto realiza un pipeline ETL para datos de COVID-19 desde un archivo Ex
 - Dado que se utilizan servidores de nube, se debe inicializar sesión con [GCloud CLI](https://cloud.google.com/sdk/docs/install?hl=es-419#windows)
 
 ## Uso
-
-1. Construir y lanzar los contenedores de Docker:
+Construir y lanzar los contenedores de Docker:
    ```bash
    docker build -t my_cron_app . 
    docker run -d --init my_cron_app
    ```
-
-2. Acceder a la interfaz web de Airflow:
-   Abre tu navegador web y navega a [http://localhost:8080](http://localhost:8080).
-
-3. Iniciar sesión en Airflow con las credenciales:
-   - **Username**: admin
-   - **Password**: admin
-
-4. Habilitar tu DAG:
-   - En la interfaz web de Airflow, habilita `covid_etl_dag` para la ejecución.
-
 En caso de que sólo se quiera ver el proceso en back: 
    ```bash
    python src/main.py
@@ -47,6 +35,10 @@ En caso de que sólo se quiera ver el proceso en back:
 
 - `db/schema_cloud.sql`: Contiene el esquema de la base de datos para BigQuery, con tablas `department`, `municipality`, `gender`, `status`, `type_contagion` y `cases`.
 - `db/schema_local.sql`: Contiene el esquema de la base de datos para SQLite, con estructuras similares al esquema de BigQuery.
+
+## Tablero
+
+Puedes visualizar y analizar los datos generados por esta aplicación en nuestro tablero de Looker Studio. Haz clic en el siguiente enlace para acceder: [Ver Tablero de Looker Studio](https://lookerstudio.google.com/reporting/52dc6bf3-e8cc-41bc-9472-4ca41d7dfd99).
 
 ## Notas adicionales
 
